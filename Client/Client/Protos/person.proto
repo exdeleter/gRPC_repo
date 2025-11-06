@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Service";
+
+package person;
+
+// The greeting service definition.
+service Person {
+  // Sends a greeting
+  rpc SayHello (PersonRequest) returns (Response);
+}
+
+// The request message containing the user's name.
+message PersonRequest{
+  string name = 1;
+  int32 age = 2;
+  google.protobuf.BoolValue is_married = 3;
+}
+
+// The response message containing the greetings.
+message Response {
+  string message = 1;
+}
