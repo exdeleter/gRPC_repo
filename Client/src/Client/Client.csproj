@@ -11,6 +11,9 @@
       <Content Include="..\.dockerignore">
         <Link>.dockerignore</Link>
       </Content>
+      <Content Update="appsettings.Development.json">
+        <DependentUpon>appsettings.json</DependentUpon>
+      </Content>
     </ItemGroup>
 
     <ItemGroup>
@@ -27,6 +30,14 @@
         <PrivateAssets>all</PrivateAssets>
       </PackageReference>
       <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
+      <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.8">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Database\Database.csproj" />
     </ItemGroup>
 
 </Project>

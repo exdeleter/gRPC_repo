@@ -1,6 +1,8 @@
 ﻿using Client.Services;
 using Client.Services.Abstractions;
 
+using Database;
+
 using Grpc.Net.Client;
 
 using Service;
@@ -21,6 +23,13 @@ builder.Services.AddSingleton(sp =>
 builder.Services.AddTransient<IPersonService, PersonService>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+#if DEBUG
+builder.Configuration.AddJsonFile("appsettings.Development.json");
+#else
+    builder.Configuration.AddJsonFile("appsettings.json");
+#endif
+
+builder.Services.AddDatabase(builder.Configuration);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -29,6 +38,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+app.ApplyMigrate();
 
 app.UseHttpsRedirection();
 
