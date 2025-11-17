@@ -2,7 +2,7 @@
 
 namespace Domain.Entities;
 
-public class Request
+public class RequestEntity
 {
     public int Id { get; set; }
     public RequestStatus Status { get; set; }

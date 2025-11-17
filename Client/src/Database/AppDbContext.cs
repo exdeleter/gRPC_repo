@@ -8,7 +8,7 @@ namespace Database;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<Request> Requests { get; set; }
+    public DbSet<RequestEntity> Requests { get; set; }
     public DbSet<RequestResult> RequestResults { get; set; }
 
     public AppDbContext(DbContextOptions<AppDbContext> options) 
@@ -26,7 +26,7 @@ public class AppDbContext : DbContext
     public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         // Auto-update UpdatedAt
-        foreach (var entry in ChangeTracker.Entries<Request>())
+        foreach (var entry in ChangeTracker.Entries<RequestEntity>())
         {
             switch (entry.State)
             {

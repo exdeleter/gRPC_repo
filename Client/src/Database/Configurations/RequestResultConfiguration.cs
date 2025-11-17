@@ -3,6 +3,8 @@ using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
+namespace Database.Configurations;
+
 public class RequestResultConfiguration : IEntityTypeConfiguration<RequestResult>
 {
     public void Configure(EntityTypeBuilder<RequestResult> builder)

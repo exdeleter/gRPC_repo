@@ -5,9 +5,9 @@ namespace Database.Configurations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-public class RequestConfiguration : IEntityTypeConfiguration<Request>
+public class RequestConfiguration : IEntityTypeConfiguration<RequestEntity>
 {
-    public void Configure(EntityTypeBuilder<Request> builder)
+    public void Configure(EntityTypeBuilder<RequestEntity> builder)
     {
         builder.ToTable("requests");
 
@@ -35,7 +35,7 @@ public class RequestConfiguration : IEntityTypeConfiguration<Request>
             .HasDefaultValueSql("NOW()");
 
         builder.HasMany(x => x.Results)
-            .WithOne(r => r.Request)
+            .WithOne(r => r.RequestEntity)
             .HasForeignKey(r => r.RequestId)
             .OnDelete(DeleteBehavior.Cascade);
     }

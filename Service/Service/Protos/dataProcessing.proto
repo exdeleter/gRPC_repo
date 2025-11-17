@@ -1,0 +1,78 @@
+syntax = "proto3";
+
+import "google/protobuf/wrappers.proto";
+
+option csharp_namespace = "Service";
+
+package data;
+
+// -----------------------------
+// Service definition
+// -----------------------------
+service DataProcessing {
+
+  // Отправка задачи на обработку (возвращает request_id)
+  rpc EnqueueRequest (EnqueueRequestDto) returns (EnqueueResponseDto);
+
+  // Стриминг данных по страницам
+  rpc StreamData (StreamRequestDto) returns (stream StreamResponseDto);
+}
+
+// -----------------------------
+// Enqueue request
+// -----------------------------
+message EnqueueRequestDto {
+  string source = 1; // откуда получать данные (опционально)
+  string parameters = 2; // json с параметрами (опционально)
+}
+
+message EnqueueResponseDto {
+  int32 request_id = 1;
+  string status = 2; // NEW or IN_QUEUE
+}
+
+// -----------------------------
+// Stream request DTO
+// -----------------------------
+message StreamRequestDto {
+  int32 request_id = 1;
+}
+
+// -----------------------------
+// Stream page response
+// -----------------------------
+message StreamResponseDto {
+  int32 request_id = 1;
+
+  // paging info
+  int32 total_count = 2;   // общее количество элементов
+  int32 page = 3;          // номер страницы
+  int32 count = 4;         // количество в текущей странице
+
+  repeated DataItem data = 5;
+
+  // статус обработки
+  StreamingStatus status = 6;
+
+  // ошибка
+  google.protobuf.StringValue error_message = 7;
+}
+
+// -----------------------------
+// Data object
+// -----------------------------
+message DataItem {
+  int32 id = 1;
+  string value = 2;
+  string description = 3;
+}
+
+// -----------------------------
+// Status enum
+// -----------------------------
+enum StreamingStatus {
+  UNKNOWN = 0;
+  IN_PROGRESS = 1;
+  COMPLETED = 2;
+  FAILED = 3;
+}

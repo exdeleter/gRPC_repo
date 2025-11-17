@@ -1,0 +1,1 @@
+public record RequestDto(int Id);
