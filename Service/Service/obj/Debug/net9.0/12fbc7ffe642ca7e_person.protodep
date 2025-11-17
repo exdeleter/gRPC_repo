@@ -1,3 +1,0 @@
-obj\Debug\net9.0\Protos/Person.cs \
-obj\Debug\net9.0\Protos/PersonGrpc.cs: C:/Users/dewaf/.nuget/packages/grpc.tools/2.64.0/build/native/include/google/protobuf/wrappers.proto\
- Protos/person.proto
