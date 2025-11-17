@@ -52,6 +52,10 @@ namespace Service {
     static readonly grpc::Marshaller<global::Service.PersonRequest> __Marshaller_person_PersonRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.PersonRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Service.Response> __Marshaller_person_Response = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.Response.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Service.Request> __Marshaller_person_Request = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.Request.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Service.ResponseStream> __Marshaller_person_ResponseStream = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.ResponseStream.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Service.PersonRequest, global::Service.Response> __Method_SayHello = new grpc::Method<global::Service.PersonRequest, global::Service.Response>(
@@ -60,6 +64,14 @@ namespace Service {
         "SayHello",
         __Marshaller_person_PersonRequest,
         __Marshaller_person_Response);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Service.Request, global::Service.ResponseStream> __Method_ServerDataStream = new grpc::Method<global::Service.Request, global::Service.ResponseStream>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "ServerDataStream",
+        __Marshaller_person_Request,
+        __Marshaller_person_ResponseStream);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -83,6 +95,12 @@ namespace Service {
         throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
       }
 
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual global::System.Threading.Tasks.Task ServerDataStream(global::Service.Request request, grpc::IServerStreamWriter<global::Service.ResponseStream> responseStream, grpc::ServerCallContext context)
+      {
+        throw new grpc::RpcException(new grpc::Status(grpc::StatusCode.Unimplemented, ""));
+      }
+
     }
 
     /// <summary>Creates service definition that can be registered with a server</summary>
@@ -91,7 +109,8 @@ namespace Service {
     public static grpc::ServerServiceDefinition BindService(PersonBase serviceImpl)
     {
       return grpc::ServerServiceDefinition.CreateBuilder()
-          .AddMethod(__Method_SayHello, serviceImpl.SayHello).Build();
+          .AddMethod(__Method_SayHello, serviceImpl.SayHello)
+          .AddMethod(__Method_ServerDataStream, serviceImpl.ServerDataStream).Build();
     }
 
     /// <summary>Register service method with a service binder with or without implementation. Useful when customizing the service binding logic.
@@ -102,6 +121,7 @@ namespace Service {
     public static void BindService(grpc::ServiceBinderBase serviceBinder, PersonBase serviceImpl)
     {
       serviceBinder.AddMethod(__Method_SayHello, serviceImpl == null ? null : new grpc::UnaryServerMethod<global::Service.PersonRequest, global::Service.Response>(serviceImpl.SayHello));
+      serviceBinder.AddMethod(__Method_ServerDataStream, serviceImpl == null ? null : new grpc::ServerStreamingServerMethod<global::Service.Request, global::Service.ResponseStream>(serviceImpl.ServerDataStream));
     }
 
   }

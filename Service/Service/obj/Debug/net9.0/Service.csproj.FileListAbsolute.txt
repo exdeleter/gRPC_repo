@@ -35,3 +35,4 @@ C:\Users\dewaf\programs\c_sharp\TryGrpc\ServiceApp\Service\Service\obj\Debug\net
 C:\Users\dewaf\programs\c_sharp\TryGrpc\ServiceApp\Service\Service\obj\Debug\net9.0\Service.pdb
 C:\Users\dewaf\programs\c_sharp\TryGrpc\ServiceApp\Service\Service\obj\Debug\net9.0\Service.genruntimeconfig.cache
 C:\Users\dewaf\programs\c_sharp\TryGrpc\ServiceApp\Service\Service\obj\Debug\net9.0\ref\Service.dll
+C:\Users\dewaf\programs\c_sharp\TryGrpc\ServiceApp\Service\Service\obj\Debug\net9.0\Service.sourcelink.json

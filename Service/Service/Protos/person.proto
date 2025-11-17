@@ -10,6 +10,8 @@ package person;
 service Person {
   // Sends a greeting
   rpc SayHello (PersonRequest) returns (Response);
+
+  rpc ServerDataStream (Request) returns (stream ResponseStream);
 }
 
 // The request message containing the user's name.
@@ -22,4 +24,10 @@ message PersonRequest{
 // The response message containing the greetings.
 message Response {
   string message = 1;
+}
+
+message Request {}
+
+message ResponseStream{
+  string content = 1;
 }

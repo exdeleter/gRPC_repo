@@ -52,6 +52,10 @@ namespace Service {
     static readonly grpc::Marshaller<global::Service.PersonRequest> __Marshaller_person_PersonRequest = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.PersonRequest.Parser));
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Marshaller<global::Service.Response> __Marshaller_person_Response = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.Response.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Service.Request> __Marshaller_person_Request = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.Request.Parser));
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Marshaller<global::Service.ResponseStream> __Marshaller_person_ResponseStream = grpc::Marshallers.Create(__Helper_SerializeMessage, context => __Helper_DeserializeMessage(context, global::Service.ResponseStream.Parser));
 
     [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
     static readonly grpc::Method<global::Service.PersonRequest, global::Service.Response> __Method_SayHello = new grpc::Method<global::Service.PersonRequest, global::Service.Response>(
@@ -60,6 +64,14 @@ namespace Service {
         "SayHello",
         __Marshaller_person_PersonRequest,
         __Marshaller_person_Response);
+
+    [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+    static readonly grpc::Method<global::Service.Request, global::Service.ResponseStream> __Method_ServerDataStream = new grpc::Method<global::Service.Request, global::Service.ResponseStream>(
+        grpc::MethodType.ServerStreaming,
+        __ServiceName,
+        "ServerDataStream",
+        __Marshaller_person_Request,
+        __Marshaller_person_ResponseStream);
 
     /// <summary>Service descriptor</summary>
     public static global::Google.Protobuf.Reflection.ServiceDescriptor Descriptor
@@ -141,6 +153,16 @@ namespace Service {
       public virtual grpc::AsyncUnaryCall<global::Service.Response> SayHelloAsync(global::Service.PersonRequest request, grpc::CallOptions options)
       {
         return CallInvoker.AsyncUnaryCall(__Method_SayHello, null, options, request);
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::Service.ResponseStream> ServerDataStream(global::Service.Request request, grpc::Metadata headers = null, global::System.DateTime? deadline = null, global::System.Threading.CancellationToken cancellationToken = default(global::System.Threading.CancellationToken))
+      {
+        return ServerDataStream(request, new grpc::CallOptions(headers, deadline, cancellationToken));
+      }
+      [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]
+      public virtual grpc::AsyncServerStreamingCall<global::Service.ResponseStream> ServerDataStream(global::Service.Request request, grpc::CallOptions options)
+      {
+        return CallInvoker.AsyncServerStreamingCall(__Method_ServerDataStream, null, options, request);
       }
       /// <summary>Creates a new instance of client from given <c>ClientBaseConfiguration</c>.</summary>
       [global::System.CodeDom.Compiler.GeneratedCode("grpc_csharp_plugin", null)]

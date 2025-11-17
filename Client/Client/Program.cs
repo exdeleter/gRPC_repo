@@ -1,39 +1,37 @@
-﻿using Grpc.Net.Client;
-using Client;
+﻿using Client.Services;
+using Client.Services.Abstractions;
+
+using Grpc.Net.Client;
 
 using Service;
 
-// создаем канал для обмена сообщениями с сервером
-// параметр - адрес сервера gRPC
-// using var channel = GrpcChannel.ForAddress("http://localhost:5287");
-// // создаем клиент
-// var client = new Greeter.GreeterClient(channel);
-// Console.Write("Введите имя: ");
-// var name = Console.ReadLine();
-// // обмениваемся сообщениями с сервером
-// var reply = await client.SayHelloAsync(new HelloRequest { Name = name });
-// Console.WriteLine($"Ответ сервера: {reply.Message}");
-// Console.ReadKey();
+var builder = WebApplication.CreateBuilder(args);
 
-
-using var channel = GrpcChannel.ForAddress("http://localhost:5287");
-// создаем клиент
-var client = new Person.PersonClient(channel);
-
-var rnd = new Random();
-while (true)
+// Add services to the container.
+// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+// Add services to the container.
+// Регистрация gRPC клиента
+builder.Services.AddSingleton(sp =>
 {
-    var num = rnd.Next(1, 100);
-    // обмениваемся сообщениями с сервером
-    var req = new PersonRequest
-    {
-        Name = num.ToString(),
-        Age = num,
-        IsMarried = num % 2 == 0
-    };
-    Console.WriteLine($"Отправка сообщения с {num}");
-    
-    var reply = await client.SayHelloAsync(req);
-    Console.WriteLine($"Ответ сервера: {reply.Message}");
-    await Task.Delay(TimeSpan.FromSeconds(5));
+    var channel = GrpcChannel.ForAddress("http://localhost:5287");
+    return new Person.PersonClient(channel);
+});
+builder.Services.AddTransient<IPersonService, PersonService>();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+var app = builder.Build();
+
+// Configure the HTTP request pipeline.
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
 }
+
+app.UseHttpsRedirection();
+
+app.MapGet("/get", (IPersonService service) => service.Get());
+
+app.Run();
