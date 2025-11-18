@@ -7,6 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		compose.yaml = compose.yaml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Database", "src\Database\Database.csproj", "{5322095A-2FA1-4BC4-9573-F97175CB42B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "src\Domain\Domain.csproj", "{2032ECFB-EF8D-4CA3-B869-1257E905B4BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{05317688-B096-4CD6-8C32-69C91BBE0953}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,5 +23,17 @@ Global
 		{AD7E6DDC-1C51-4C25-8F61-5E1A9B2453EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD7E6DDC-1C51-4C25-8F61-5E1A9B2453EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD7E6DDC-1C51-4C25-8F61-5E1A9B2453EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5322095A-2FA1-4BC4-9573-F97175CB42B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5322095A-2FA1-4BC4-9573-F97175CB42B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5322095A-2FA1-4BC4-9573-F97175CB42B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5322095A-2FA1-4BC4-9573-F97175CB42B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2032ECFB-EF8D-4CA3-B869-1257E905B4BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2032ECFB-EF8D-4CA3-B869-1257E905B4BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2032ECFB-EF8D-4CA3-B869-1257E905B4BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2032ECFB-EF8D-4CA3-B869-1257E905B4BE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05317688-B096-4CD6-8C32-69C91BBE0953}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05317688-B096-4CD6-8C32-69C91BBE0953}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05317688-B096-4CD6-8C32-69C91BBE0953}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05317688-B096-4CD6-8C32-69C91BBE0953}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
