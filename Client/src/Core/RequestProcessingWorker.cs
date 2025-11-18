@@ -32,8 +32,8 @@ public class RequestProcessingWorker : BackgroundService
         {
             try
             {
-                int requestId = await _queue.DequeueAsync(stoppingToken);
-                await processor.ProcessAsync(requestId, stoppingToken);
+                var dto = await _queue.DequeueAsync(stoppingToken);
+                await processor.ProcessAsync(dto, stoppingToken);
             }
             catch (OperationCanceledException)
             {

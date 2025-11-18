@@ -1,3 +1,5 @@
+using Core.Clients.Abstractions;
+
 using Database;
 using Domain.Entities;
 using Domain.Enums;
@@ -24,9 +26,9 @@ public class RequestProcessor : IRequestProcessor
         // _logger = logger;
     }
 
-    public async Task ProcessAsync(int requestId, CancellationToken token)
+    public async Task ProcessAsync(QueueDto dto, CancellationToken token)
     {
-        var request = await _db.Requests.FindAsync([requestId], token);
+        var request = await _db.Requests.FindAsync([dto.RequestId], token);
 
         if (request is null)
         {
@@ -43,7 +45,7 @@ public class RequestProcessor : IRequestProcessor
             int total = 0;
             int received = 0;
 
-            await foreach (var page in _streaming.StreamAsync(requestId, token))
+            await foreach (var page in _streaming.StreamAsync(dto.ExternalId, token))
             {
                 token.ThrowIfCancellationRequested();
 
@@ -57,7 +59,7 @@ public class RequestProcessor : IRequestProcessor
                 {
                     _db.RequestResults.Add(new RequestResult
                     {
-                        RequestId = requestId,
+                        RequestId = dto.RequestId,
                         Key = item.Key,
                         Value = item.Value
                     });
@@ -85,7 +87,7 @@ public class RequestProcessor : IRequestProcessor
             // remove inconsistent data
             await _db.Database.ExecuteSqlRawAsync(
                 "DELETE FROM request_results WHERE request_id = {0}",
-                requestId);
+                dto.RequestId);
 
             await _db.SaveChangesAsync(token);
         }

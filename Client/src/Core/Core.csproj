@@ -21,12 +21,6 @@
 
 
     <ItemGroup>
-      <Protobuf Include="Protos\greet.proto">
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
-      <Protobuf Include="Protos\person.proto">
-        <Generator>MSBuild:Compile</Generator>
-      </Protobuf>
       <Protobuf Include="Protos\DataProcessing.proto">
         <Generator>MSBuild:Compile</Generator>
       </Protobuf>

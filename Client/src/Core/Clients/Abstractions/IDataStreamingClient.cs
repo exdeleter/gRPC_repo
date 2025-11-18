@@ -1,7 +1,9 @@
-namespace Core;
+namespace Core.Clients.Abstractions;
 
 public interface IDataStreamingClient<TData>
 {
+    Task<int> GetRequestId(CancellationToken cancellationToken);
+    
     IAsyncEnumerable<StreamPage<TData>> StreamAsync(
         int requestId,
         CancellationToken cancellationToken);

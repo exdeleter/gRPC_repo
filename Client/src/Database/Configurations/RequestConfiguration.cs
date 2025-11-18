@@ -16,6 +16,9 @@ public class RequestConfiguration : IEntityTypeConfiguration<RequestEntity>
         builder.Property(x => x.Id)
             .HasColumnName("id");
 
+        builder.Property(x => x.ExternalId)
+            .HasColumnName("external_id");
+
         builder.Property(x => x.Status)
             .HasColumnName("status")
             .HasConversion<string>();

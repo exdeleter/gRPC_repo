@@ -2,5 +2,5 @@
 
 public interface IRequestProcessor
 {
-    Task ProcessAsync(int requestId, CancellationToken token);
+    Task ProcessAsync(QueueDto dto, CancellationToken token);
 }

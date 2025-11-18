@@ -2,6 +2,8 @@ using Core;
 
 using System.Runtime.CompilerServices;
 
+using Core.Clients.Abstractions;
+
 using Grpc.Core;
 
 using Microsoft.Extensions.Logging;
@@ -18,6 +20,15 @@ public class GrpcDataStreaming : IDataStreamingClient<ResponseItem>
     {
         _client = client;
         // _logger = logger;
+    }
+
+    public async Task<int> GetRequestId(CancellationToken cancellationToken)
+    {
+        var request = new EnqueueRequestDto { };
+
+        var call = await _client.EnqueueRequestAsync(request, cancellationToken: cancellationToken);
+
+        return call.RequestId;
     }
 
     public async IAsyncEnumerable<StreamPage<ResponseItem>> StreamAsync(

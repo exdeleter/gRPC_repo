@@ -5,6 +5,9 @@ namespace Domain.Entities;
 public class RequestEntity
 {
     public int Id { get; set; }
+
+    public int ExternalId { get; set; }
+
     public RequestStatus Status { get; set; }
     public double Progress { get; set; }
     public string? ErrorMessage { get; set; }

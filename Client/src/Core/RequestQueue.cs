@@ -4,20 +4,22 @@ using System.Threading.Channels;
 
 public class RequestQueue : IRequestQueue
 {
-    private readonly Channel<int> _queue;
+    private readonly Channel<QueueDto> _queue;
 
     public RequestQueue()
     {
-        _queue = Channel.CreateUnbounded<int>();
+        _queue = Channel.CreateUnbounded<QueueDto>();
     }
 
-    public async ValueTask EnqueueAsync(int requestId)
+    public async ValueTask EnqueueAsync(QueueDto dto)
     {
-        await _queue.Writer.WriteAsync(requestId);
+        await _queue.Writer.WriteAsync(dto);
     }
 
-    public async ValueTask<int> DequeueAsync(CancellationToken cancellationToken)
+    public async ValueTask<QueueDto> DequeueAsync(CancellationToken cancellationToken)
     {
         return await _queue.Reader.ReadAsync(cancellationToken);
     }
 }
+
+public record QueueDto(int RequestId, int ExternalId);
